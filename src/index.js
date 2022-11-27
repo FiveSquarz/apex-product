@@ -7,7 +7,7 @@ class Game extends React.Component {
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div className="game" style={{ fontSize: "5vmin" }}>
-          Chuanhai's APEX product will be here.. soon
+          Chuanhai's APEX product will be here.. soon testing
         </div>
         {/*<div className="game" style={{ fontSize: "3vmin" }}>
           Time Remaining: 5
