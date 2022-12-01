@@ -1,3 +1,4 @@
+/* global BigInt */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -62,18 +63,15 @@ function Step5(props) {
   );
 }
 
-class EncryptDecrypt extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <p>
-        !!!
-      </p>
-    );
-  }
+function EncryptDecrypt() {
+  return (
+    <div>
+      {/*<p>{"Φi".charCodeAt(0)}</p>*/}
+      <p>{(900n ** 34681n % 51143n).toString()}</p>
+      <p>{(30454n ** 81097n % 51143n).toString()}</p>
+      <p>!!!</p>
+    </div>
+  );
 }
 
 class App extends React.Component {
