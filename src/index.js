@@ -7,7 +7,7 @@ function Step1(props) {
   return (
     <div>
       <p>
-        Step 1: enter 2 prime numbers p and q whose product is at least 10
+        Step 1: enter 2 prime numbers p and q whose product is at least 10 <a href="https://raw.githubusercontent.com/FiveSquarz/apex-product/main/src/primes.txt" target="_blank">(list of prime numbers)</a>
       </p>
       <form onSubmit={props.handleSubmitPQ}>
         <label>
@@ -18,6 +18,9 @@ function Step1(props) {
           q:
           <input type="text" value={props.q} onChange={props.handleChangeQ} required />
         </label>
+        <span>
+          product: {props.p * props.q}
+        </span>
         <input type="submit" value="Submit" />
       </form>
     </div>
@@ -44,7 +47,7 @@ function Step2To4(props) {
 }
 
 function Step5(props) {
-  return(
+  return (
     <div>
       <p>Step 1: p = {props.p}, q = {props.q}</p>
       <p>Step 2: N = {props.p * props.q}</p>
@@ -54,7 +57,7 @@ function Step5(props) {
       <p>{props.dOptions.join(" ")} ... + any multiple of Φ(N)</p>
       <form onSubmit={props.handleSubmitD}>
         <label>
-          e:
+          d:
           <input type="text" value={props.d} onChange={props.handleChangeD} required />
         </label>
         <input type="submit" value="Submit" />
@@ -66,10 +69,22 @@ function Step5(props) {
 function EncryptDecrypt() {
   return (
     <div>
-      {/*<p>{"Φi".charCodeAt(0)}</p>*/}
-      <p>{(900n ** 34681n % 51143n).toString()}</p>
-      <p>{(30454n ** 81097n % 51143n).toString()}</p>
-      <p>!!!</p>
+      {/*<p>{(900n ** 5371n % 5767n).toString()}</p>
+      <p>{(3480n ** 13891n % 5767n).toString()}</p>
+  <p>!!!</p>*/}
+      <form style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "stretch" }}>
+          <label style={{width: "600px"}}>
+            text:
+            <textarea type="textarea" value={3} onChange={() => {}} />
+          </label>
+          <label style={{width: "600px"}}>
+            unicode input:
+            <textarea type="textarea" value={3} onChange={() => {}} />
+          </label>
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
     </div>
   );
 }
@@ -91,6 +106,10 @@ class App extends React.Component {
     this.handleChangeD = this.handleChangeD.bind(this);
     this.handleSubmitD = this.handleSubmitD.bind(this);
 
+    this.handleChangeText = this.handleChangeText.bind(this);
+    this.handleChangeUnicode = this.handleChangeUnicode.bind(this);
+    this.handleSubmitEndecrypt = this.handleSubmitEndecrypt.bind(this);
+
     this.state = {
       visible: this.getStep1(),
 
@@ -100,7 +119,10 @@ class App extends React.Component {
       d: "",
 
       eOptions: [],
-      dOptions: []
+      dOptions: [],
+
+      textInput: "",
+      unicodeInput: "",
     };
   }
 
@@ -123,7 +145,7 @@ class App extends React.Component {
   }
 
   getStep5() {
-    return <Step5 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} dOptions={this.state.dOptions} handleChangeD={this.handleChangeD} handleSubmitD={this.handleSubmitD}/>
+    return <Step5 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} dOptions={this.state.dOptions} handleChangeD={this.handleChangeD} handleSubmitD={this.handleSubmitD} />
   }
 
   handleChangeP(event) {
@@ -218,8 +240,20 @@ class App extends React.Component {
     event.preventDefault();
   }
 
+  handleChangeText(event) {
+
+  }
+
+  handleChangeUnicode(event) {
+
+  }
+
+  handleSubmitEndecrypt(event) {
+
+  }
+
   isPrime(num) {
-    for (let i = 3; i * i <= num; i+=2)
+    for (let i = 3; i * i <= num; i += 2)
       if (num % i === 0) return false;
     return num >= 2 && (num == 2 || num % 2 != 0);
   }
@@ -228,7 +262,7 @@ class App extends React.Component {
     if (!b) {
       return a;
     }
-  
+
     return this.gcf(b, a % b);
   }
 
@@ -276,7 +310,7 @@ class App extends React.Component {
             Generate Keys
           </button>
           <button onClick={() => {
-            this.setState({ visible: <EncryptDecrypt /> })
+            this.setState({ visible: <EncryptDecrypt textInput={this.state.textInput} unicodeInput={this.state.unicodeInput} handleChangeText={this.handleChangeText} handleChangeUnicode={this.handleChangeUnicode} handleSubmitEndecrypt={this.handleSubmitEndecrypt} /> })
           }}>
             Encrypt/Decrypt
           </button>
