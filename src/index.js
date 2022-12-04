@@ -66,23 +66,38 @@ function Step5(props) {
   );
 }
 
-function EncryptDecrypt() {
+function EncryptDecrypt(props) {
   return (
     <div>
       {/*<p>{(900n ** 5371n % 5767n).toString()}</p>
       <p>{(3480n ** 13891n % 5767n).toString()}</p>
   <p>!!!</p>*/}
-      <form style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "stretch" }}>
-          <label style={{width: "600px"}}>
-            text:
-            <textarea type="textarea" value={3} onChange={() => {}} />
+      <form className="encryptDecrypt" onSubmit={props.handleSubmitEndecrypt}>
+        <div>
+          <label htmlFor="keyInput">
+            key:
           </label>
-          <label style={{width: "600px"}}>
-            unicode input:
-            <textarea type="textarea" value={3} onChange={() => {}} />
-          </label>
+          (
+          <input id="keyInput" type="text" value={props.key1} onChange={props.handleChangeKey1} required />
+          ,&nbsp;
+          <input type="text" value={props.key2} onChange={props.handleChangeKey2} required />
+          )
+          <div />
         </div>
+        <div>
+          <label htmlFor="textInput">
+            text:
+          </label>
+          <textarea id="textInput" type="textarea" value={props.textInput} onChange={props.handleChangeTextInput} />
+          <div />
+        </div>
+        <div>
+          <label htmlFor="unicodeInput">
+            unicode input:
+          </label>
+          <textarea id="unicodeInput" type="textarea" value={props.unicodeInput} onChange={props.handleChangeUnicodeInput} />
+          <div />
+          </div>
         <input type="submit" value="Submit" />
       </form>
     </div>
@@ -106,8 +121,11 @@ class App extends React.Component {
     this.handleChangeD = this.handleChangeD.bind(this);
     this.handleSubmitD = this.handleSubmitD.bind(this);
 
-    this.handleChangeText = this.handleChangeText.bind(this);
-    this.handleChangeUnicode = this.handleChangeUnicode.bind(this);
+    this.handleChangeKey1 = this.handleChangeKey1.bind(this);
+    this.handleChangeKey2 = this.handleChangeKey2.bind(this);
+
+    this.handleChangeTextInput = this.handleChangeTextInput.bind(this);
+    this.handleChangeUnicodeInput = this.handleChangeUnicodeInput.bind(this);
     this.handleSubmitEndecrypt = this.handleSubmitEndecrypt.bind(this);
 
     this.state = {
@@ -120,6 +138,9 @@ class App extends React.Component {
 
       eOptions: [],
       dOptions: [],
+
+      key1: "",
+      key2: "",
 
       textInput: "",
       unicodeInput: "",
@@ -145,7 +166,11 @@ class App extends React.Component {
   }
 
   getStep5() {
-    return <Step5 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} dOptions={this.state.dOptions} handleChangeD={this.handleChangeD} handleSubmitD={this.handleSubmitD} />
+    return <Step5 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} dOptions={this.state.dOptions} handleChangeD={this.handleChangeD} handleSubmitD={this.handleSubmitD} />;
+  }
+
+  getEncryptDecrypt() {
+    return <EncryptDecrypt key1={this.state.key1} key2={this.state.key2} textInput={this.state.textInput} unicodeInput={this.state.unicodeInput} handleChangeKey1={this.handleChangeKey1} handleChangeKey2={this.handleChangeKey2} handleChangeTextInput={this.handleChangeTextInput} handleChangeUnicodeInput={this.handleChangeUnicodeInput} handleSubmitEndecrypt={this.handleSubmitEndecrypt} />;
   }
 
   handleChangeP(event) {
@@ -240,16 +265,83 @@ class App extends React.Component {
     event.preventDefault();
   }
 
-  handleChangeText(event) {
-
+  handleChangeKey1(event) {
+    this.setState({
+      key1: isNaN(parseInt(event.target.value)) ? "" : parseInt(event.target.value)
+    }, () => {
+      this.setState({
+        visible: this.getEncryptDecrypt()
+      });
+    });
   }
 
-  handleChangeUnicode(event) {
+  handleChangeKey2(event) {
+    this.setState({
+      key2: isNaN(parseInt(event.target.value)) ? "" : parseInt(event.target.value)
+    }, () => {
+      this.setState({
+        visible: this.getEncryptDecrypt()
+      });
+    });
+  }
 
+  handleChangeTextInput(event) {
+    this.setState({
+      textInput: event.target.value,
+
+      unicodeInput: this.textToUnicode(event.target.value)
+    }, () => {
+      this.setState({
+        visible: this.getEncryptDecrypt()
+      })
+    });
+  }
+
+  handleChangeUnicodeInput(event) {
+    const newUnicode = event.target.value.replaceAll(/[^\d| ]/g, "");
+    this.setState({
+      unicodeInput: newUnicode,
+
+      textInput: this.unicodeToText(newUnicode)
+    }, () => {
+      this.setState({
+        visible: this.getEncryptDecrypt()
+      })
+    });
   }
 
   handleSubmitEndecrypt(event) {
+    let newCodes = "";
+    for (const code of this.state.unicodeInput.split(" ")) {
+      newCodes += (BigInt(parseInt(code)) ** BigInt(this.state.key1) % BigInt(this.state.key2)).toString() + " ";
+    }
+    newCodes = newCodes.slice(0, -1);
 
+    this.setState({
+      unicodeInput: newCodes,
+      textInput: this.unicodeToText(newCodes)
+    }, () => {
+      this.setState({
+        visible: this.getEncryptDecrypt()
+      });
+    });
+    event.preventDefault();
+  }
+
+  textToUnicode(text) {
+    let result = "";
+    for (const char of text) {
+      result += char.codePointAt(0) + " ";
+    }
+    return result.slice(0, -1);
+  }
+
+  unicodeToText(unicode) {
+    let result = "";
+    for (const code of unicode.split(" ").filter((value, index, arr) => {return value != ""})) {
+      result += String.fromCodePoint(code);
+    }
+    return result;
   }
 
   isPrime(num) {
@@ -310,7 +402,7 @@ class App extends React.Component {
             Generate Keys
           </button>
           <button onClick={() => {
-            this.setState({ visible: <EncryptDecrypt textInput={this.state.textInput} unicodeInput={this.state.unicodeInput} handleChangeText={this.handleChangeText} handleChangeUnicode={this.handleChangeUnicode} handleSubmitEndecrypt={this.handleSubmitEndecrypt} /> })
+            this.setState({ visible: this.getEncryptDecrypt() })
           }}>
             Encrypt/Decrypt
           </button>

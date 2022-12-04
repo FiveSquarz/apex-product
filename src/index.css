@@ -11,6 +11,35 @@ body {
 
 textarea {
   resize: none;
-  width: 50vmin;
+  /*width: 50vmin;*/
   vertical-align: top;
+}
+
+.encryptDecrypt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.encryptDecrypt div {
+  display: flex;
+  flex-direction: row;
+  align-items: "stretch";
+}
+
+.encryptDecrypt div div {
+  width: 100px;
+}
+
+.encryptDecrypt label {
+  width: 100px;
+  text-align: right;
+}
+
+.encryptDecrypt div input {
+  width: 80px;
+}
+
+.encryptDecrypt textarea {
+  width: 300px;
 }
