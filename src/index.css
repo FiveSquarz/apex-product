@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: beige;
 }
 
 .largeTextBox {
@@ -42,4 +43,32 @@ textarea {
 
 .encryptDecrypt textarea {
   width: 300px;
+}
+
+.color1 {
+  color: rgb(94, 91, 255);
+}
+
+.color2 {
+  color: brown;
+}
+
+.color3 {
+  color: darkseagreen;
+}
+
+.color4 {
+  color: sandybrown;
+}
+
+.color5 {
+  color: red;
+}
+
+.color6 {
+  color: green;
+}
+
+.transparent {
+  color: transparent
 }

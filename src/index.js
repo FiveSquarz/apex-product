@@ -4,23 +4,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 function Step1(props) {
+  const p = <span className="color1">p</span>;
+  const q = <span className="color2">q</span>;
   return (
-    <div>
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
       <p>
-        Step 1: enter 2 prime numbers p and q whose product is at least 10 <a href="https://raw.githubusercontent.com/FiveSquarz/apex-product/main/src/primes.txt" target="_blank">(list of prime numbers)</a>
+        Step 1: enter 2 prime numbers {p} and {q} whose product is at least 10 <a href="https://raw.githubusercontent.com/FiveSquarz/apex-product/main/src/primes.txt" target="_blank">(list of prime numbers)</a>
       </p>
-      <form onSubmit={props.handleSubmitPQ}>
+      <form onSubmit={props.handleSubmitPQ} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <label>
-          p:
+          {p}:
           <input type="text" value={props.p} onChange={props.handleChangeP} required />
+          <span className="transparent">p:</span> {/*centering*/}
         </label>
         <label>
-          q:
+          {q}:
           <input type="text" value={props.q} onChange={props.handleChangeQ} required />
+          <span className="transparent">q:</span>
         </label>
-        <span>
-          product: {props.p * props.q}
-        </span>
         <input type="submit" value="Submit" />
       </form>
     </div>
@@ -28,50 +29,89 @@ function Step1(props) {
 }
 
 function Step2To4(props) {
+  const p = <span className="color1">p</span>;
+  const q = <span className="color2">q</span>;
+  const pv = <span className="color1">{props.p}</span>;
+  const qv = <span className="color2">{props.q}</span>;
+  const N = <span className="color3">N</span>;
+  const Nv = <span className="color3">{props.q * props.q}</span>;
+  const phi = <span className="color4">Φ</span>;
+  const phiv = <span className="color4">{(props.p - 1) * (props.q - 1)}</span>;
+  const e = <span className="color5">e</span>;
   return (
-    <div>
-      <p>Step 1: p = {props.p}, q = {props.q}</p>
-      <p>Step 2: N = p * q = {props.p * props.q}</p>
-      <p>Step 3: Φ(N) = (p - 1)(q - 1) = {(props.p - 1) * (props.q - 1)}</p>
-      <p>Step 4: choose an integer e such that 1 &lt; e &lt; Φ(N) and e is coprime with N and Φ(N)</p>
-      <p>{props.eOptions.join(" ")}</p>
-      <form onSubmit={props.handleSubmitE}>
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+      <p>Step 1: {p} = {pv}, {q} = {qv}</p>
+      <p>Step 2: {N} = {p} * {q} = {Nv}</p>
+      <p>Step 3: {phi}({N}) = ({p} - 1)({q} - 1) = {phiv}</p>
+      <p>Step 4: choose an integer {e} such that 1 &lt; {e} &lt; {phi}({N}) and {e} is coprime with {N} and {phi}({N})</p>
+      <form onSubmit={props.handleSubmitE} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <label>
-          e:
+          {e}:
           <input type="text" value={props.e} onChange={props.handleChangeE} required />
+          <span className="transparent">e:</span>
         </label>
         <input type="submit" value="Submit" />
       </form>
+      <p>examples: {props.eOptions.join(" ")}</p>
     </div>
   );
 }
 
 function Step5(props) {
+  const p = <span className="color1">p</span>;
+  const q = <span className="color2">q</span>;
+  const pv = <span className="color1">{props.p}</span>;
+  const qv = <span className="color2">{props.q}</span>;
+  const N = <span className="color3">N</span>;
+  const Nv = <span className="color3">{props.q * props.q}</span>;
+  const phi = <span className="color4">Φ</span>;
+  const phiv = <span className="color4">{(props.p - 1) * (props.q - 1)}</span>;
+  const e = <span className="color5">e</span>;
+  const ev = <span className="color5">{props.e}</span>;
+  const d = <span className="color6">d</span>;
   return (
-    <div>
-      <p>Step 1: p = {props.p}, q = {props.q}</p>
-      <p>Step 2: N = {props.p * props.q}</p>
-      <p>Step 3: Φ(N) = {(props.p - 1) * (props.q - 1)}</p>
-      <p>Step 4: e = {props.e}</p>
-      <p>Step 5: choose a positive integer d such that de % Φ(N) = 1</p>
-      <p>{props.dOptions.join(" ")} ... + any multiple of Φ(N)</p>
-      <form onSubmit={props.handleSubmitD}>
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+      <p>Step 1: {p} = {pv}, {q} = {qv}</p>
+      <p>Step 2: {N} = {Nv}</p>
+      <p>Step 3: {phi}({N}) = {phiv}</p>
+      <p>Step 4: {e} = {ev}</p>
+      <p>Step 5: choose a positive integer {d} such that {d}{e} % {phi}({N}) = 1</p>
+      <form onSubmit={props.handleSubmitD} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <label>
-          d:
+          {d}:
           <input type="text" value={props.d} onChange={props.handleChangeD} required />
+          <span className="transparent">d:</span>
         </label>
         <input type="submit" value="Submit" />
       </form>
+      <p>examples: {props.dOptions.join(" ")} ... + any multiple of {phi}({N})</p>
+      <div />
+      <div style={{display: "flex"}}>
+        <div style={{width: "160px"}}>Your public key will be: </div><div style={{width: "50px"}}>({e}, {N})</div>
+      </div>
+      <div style={{display: "flex"}}>
+        <div style={{width: "160px"}}>Your private key will be: </div><div style={{width: "50PX"}}>({d}, {N})</div>
+      </div>
     </div>
   );
+}
+
+function Step6(props) {
+  return (
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+      <div style={{display: "flex"}}>
+        <div style={{width: "130px"}}>Your public key is: </div><div style={{width: "50px"}}>({props.e}, {props.p * props.q})</div>
+      </div>
+      <div style={{display: "flex"}}>
+        <div style={{width: "130px"}}>Your private key is: </div><div style={{width: "50px"}}>({props.d}, {props.p * props.q})</div>
+      </div>
+    </div>
+  )
 }
 
 function EncryptDecrypt(props) {
   return (
     <div>
-      {/*<p>{(900n ** 5371n % 5767n).toString()}</p>
-      <p>{(3480n ** 13891n % 5767n).toString()}</p>
-  <p>!!!</p>*/}
       <form className="encryptDecrypt" onSubmit={props.handleSubmitEndecrypt}>
         <div>
           <label htmlFor="keyInput">
@@ -136,6 +176,7 @@ class App extends React.Component {
       e: "",
       d: "",
 
+      allEOptions: [],
       eOptions: [],
       dOptions: [],
 
@@ -154,6 +195,8 @@ class App extends React.Component {
       return this.getStep2To4();
     } else if (step == 5) {
       return this.getStep5();
+    } else if (step == 6) {
+      return this.getStep6();
     }
   }
 
@@ -167,6 +210,10 @@ class App extends React.Component {
 
   getStep5() {
     return <Step5 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} dOptions={this.state.dOptions} handleChangeD={this.handleChangeD} handleSubmitD={this.handleSubmitD} />;
+  }
+
+  getStep6() {
+    return <Step6 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} />;
   }
 
   getEncryptDecrypt() {
@@ -199,9 +246,31 @@ class App extends React.Component {
     if (isNaN(p) || isNaN(q) || !this.isPrime(p) || !this.isPrime(q) || p * q <= 9) {
       alert("your inputs are invalid");
     } else {
+      let allEOptions = this.generateEOptions();
+      let temp = [...allEOptions];
+      let eOptions = [];
+
+      //1 option
+      eOptions.push(temp[0]);
+      temp = temp.slice(1);
+
+      //2 options
+      if (temp.length >= 1) {
+        eOptions.push(temp.pop());
+      }
+
+      //up to 3 more options
+      temp = temp.sort(() => 0.5 - Math.random());
+      for (let i = 0; i < 3 && i < temp.length; i++) {
+        eOptions.push(temp.pop());
+      }
+      console.log(eOptions);
+      eOptions.sort((a, b) => a - b);
+
       this.step = 4;
       this.setState({
-        eOptions: this.generateEOptions()
+        allEOptions: allEOptions,
+        eOptions: eOptions,
       }, () => {
         this.setState({
           visible: this.getStep2To4(),
@@ -223,7 +292,7 @@ class App extends React.Component {
 
   handleSubmitE(event) {
     const e = parseInt(this.state.e);
-    if (isNaN(e) || !this.state.eOptions.includes(e)) {
+    if (isNaN(e) || !this.state.allEOptions.includes(e)) {
       alert("your input is invalid");
     } else {
       this.step = 5;
@@ -253,14 +322,10 @@ class App extends React.Component {
     if (isNaN(d) || !this.state.dOptions.includes(d)) {
       alert("your input is invalid");
     } else {
-      /*this.step = 5;
+      this.step = 6;
       this.setState({
-        dOptions: this.generateDOptions()
-      }, () => {
-        this.setState({
-          visible: this.getStep5()
-        });
-      });*/
+        visible: this.getStep6()
+      });
     }
     event.preventDefault();
   }
@@ -339,7 +404,7 @@ class App extends React.Component {
   unicodeToText(unicode) {
     let result = "";
     for (const code of unicode.split(" ").filter((value, index, arr) => {return value != ""})) {
-      result += String.fromCodePoint(code);
+      result += BigInt(code) <= BigInt(1114111) ? String.fromCodePoint(code) : " ";
     }
     return result;
   }
@@ -392,8 +457,13 @@ class App extends React.Component {
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div className="game" style={{ fontSize: "5vmin" }}>
-          Chuanhai's APEX product will be here.. soon :)
+          RSA Encryption Demo
         </div>
+        <div className="game" style={{ fontSize: "2vmin"}}>
+          Chuanhai Xu's APEX Product
+        </div>
+
+        <div style={{height: "40px"}} />
 
         <div className='game'>
           <button onClick={() => {
@@ -407,6 +477,9 @@ class App extends React.Component {
             Encrypt/Decrypt
           </button>
         </div>
+        
+        <div style={{height: "40px"}} />
+
         {this.state.visible}
 
       </div>
