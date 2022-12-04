@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/apex-product/static/css/main.31bf12cd.css",
-    "main.js": "/apex-product/static/js/main.34236d8e.js",
+    "main.js": "/apex-product/static/js/main.33e19f18.js",
     "index.html": "/apex-product/index.html",
     "main.31bf12cd.css.map": "/apex-product/static/css/main.31bf12cd.css.map",
-    "main.34236d8e.js.map": "/apex-product/static/js/main.34236d8e.js.map"
+    "main.33e19f18.js.map": "/apex-product/static/js/main.33e19f18.js.map"
   },
   "entrypoints": [
     "static/css/main.31bf12cd.css",
-    "static/js/main.34236d8e.js"
+    "static/js/main.33e19f18.js"
   ]
 }
