@@ -2,6 +2,8 @@ body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
   background-color: beige;
+
+  text-align: center;
 }
 
 .largeTextBox {
@@ -70,5 +72,5 @@ textarea {
 }
 
 .transparent {
-  color: transparent
+  color: transparent;
 }

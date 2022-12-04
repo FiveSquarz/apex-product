@@ -477,7 +477,7 @@ class App extends React.Component {
             Encrypt/Decrypt
           </button>
         </div>
-        
+
         <div style={{height: "40px"}} />
 
         {this.state.visible}
