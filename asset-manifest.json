@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/apex-product/static/css/main.da597d68.css",
-    "main.js": "/apex-product/static/js/main.b4279a60.js",
+    "main.css": "/apex-product/static/css/main.9e0fbec7.css",
+    "main.js": "/apex-product/static/js/main.839a4954.js",
     "index.html": "/apex-product/index.html",
-    "main.da597d68.css.map": "/apex-product/static/css/main.da597d68.css.map",
-    "main.b4279a60.js.map": "/apex-product/static/js/main.b4279a60.js.map"
+    "main.9e0fbec7.css.map": "/apex-product/static/css/main.9e0fbec7.css.map",
+    "main.839a4954.js.map": "/apex-product/static/js/main.839a4954.js.map"
   },
   "entrypoints": [
-    "static/css/main.da597d68.css",
-    "static/js/main.b4279a60.js"
+    "static/css/main.9e0fbec7.css",
+    "static/js/main.839a4954.js"
   ]
 }
