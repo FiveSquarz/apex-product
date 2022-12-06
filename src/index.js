@@ -13,14 +13,14 @@ function Step1(props) {
       </p>
       <form onSubmit={props.handleSubmitPQ} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <label>
-          {p}:
+          {p}:&nbsp;
           <input type="text" value={props.p} onChange={props.handleChangeP} required />
-          <span className="transparent">p:</span> {/*centering*/}
+          <span className="transparent">p:&nbsp;</span> {/*centering*/}
         </label>
         <label>
-          {q}:
+          {q}:&nbsp;
           <input type="text" value={props.q} onChange={props.handleChangeQ} required />
-          <span className="transparent">q:</span>
+          <span className="transparent">q:&nbsp;</span>
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -46,9 +46,9 @@ function Step2To4(props) {
       <p>Step 4: choose an integer {e} such that 1 &lt; {e} &lt; {phi}({N}) and {e} is coprime with {N} and {phi}({N})</p>
       <form onSubmit={props.handleSubmitE} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <label>
-          {e}:
+          {e}:&nbsp;
           <input type="text" value={props.e} onChange={props.handleChangeE} required />
-          <span className="transparent">e:</span>
+          <span className="transparent">e:&nbsp;</span>
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -78,9 +78,9 @@ function Step5(props) {
       <p>Step 5: choose a positive integer {d} such that {d}{e} % {phi}({N}) = 1</p>
       <form onSubmit={props.handleSubmitD} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <label>
-          {d}:
+          {d}:&nbsp;
           <input type="text" value={props.d} onChange={props.handleChangeD} required />
-          <span className="transparent">d:</span>
+          <span className="transparent">d:&nbsp;</span>
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -99,12 +99,8 @@ function Step5(props) {
 function Step6(props) {
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <div style={{display: "flex"}}>
-        <div style={{width: "130px"}}>Your public key is: </div><div style={{width: "50px"}}>({props.e}, {props.p * props.q})</div>
-      </div>
-      <div style={{display: "flex"}}>
-        <div style={{width: "130px"}}>Your private key is: </div><div style={{width: "50px"}}>({props.d}, {props.p * props.q})</div>
-      </div>
+      <div>Your public key is: ({props.e}, {props.p * props.q})</div>
+      <div>Your private key is: ({props.d}, {props.p * props.q})</div>
     </div>
   )
 }
@@ -264,7 +260,6 @@ class App extends React.Component {
       for (let i = 0; i < 3 && i < temp.length; i++) {
         eOptions.push(temp.pop());
       }
-      console.log(eOptions);
       eOptions.sort((a, b) => a - b);
 
       this.step = 4;
@@ -378,7 +373,7 @@ class App extends React.Component {
   handleSubmitEndecrypt(event) {
     let newCodes = "";
     for (const code of this.state.unicodeInput.split(" ")) {
-      newCodes += (BigInt(parseInt(code)) ** BigInt(this.state.key1) % BigInt(this.state.key2)).toString() + " ";
+      newCodes += (BigInt(code) ** BigInt(this.state.key1) % BigInt(this.state.key2)).toString() + " ";
     }
     newCodes = newCodes.slice(0, -1);
 

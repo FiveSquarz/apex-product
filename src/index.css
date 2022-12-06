@@ -1,8 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+  margin: 10vmin;
   background-color: beige;
-
   text-align: center;
 }
 
@@ -31,20 +30,21 @@ textarea {
 }
 
 .encryptDecrypt div div {
-  width: 100px;
+  width: 20vmin;
 }
 
 .encryptDecrypt label {
-  width: 100px;
+  width: 20vmin;
   text-align: right;
 }
 
 .encryptDecrypt div input {
-  width: 80px;
+  width: 12vmin;
 }
 
 .encryptDecrypt textarea {
-  width: 300px;
+  width: 50vmin;
+  height: 10vmin;
 }
 
 .color1 {
