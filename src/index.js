@@ -129,7 +129,7 @@ function EncryptDecrypt(props) {
         </div>
         <div>
           <label htmlFor="unicodeInput">
-            unicode input:&nbsp;
+            unicode:&nbsp;
           </label>
           <textarea id="unicodeInput" type="textarea" value={props.unicodeInput} onChange={props.handleChangeUnicodeInput} />
           <div />
