@@ -111,7 +111,7 @@ function EncryptDecrypt(props) {
       <form className="encryptDecrypt" onSubmit={props.handleSubmitEndecrypt}>
         <div>
           <label htmlFor="keyInput">
-            key:
+            key:&nbsp;
           </label>
           (
           <input id="keyInput" type="text" value={props.key1} onChange={props.handleChangeKey1} required />
@@ -122,14 +122,14 @@ function EncryptDecrypt(props) {
         </div>
         <div>
           <label htmlFor="textInput">
-            text:
+            text:&nbsp;
           </label>
           <textarea id="textInput" type="textarea" value={props.textInput} onChange={props.handleChangeTextInput} />
           <div />
         </div>
         <div>
           <label htmlFor="unicodeInput">
-            unicode input:
+            unicode input:&nbsp;
           </label>
           <textarea id="unicodeInput" type="textarea" value={props.unicodeInput} onChange={props.handleChangeUnicodeInput} />
           <div />
