@@ -52,7 +52,7 @@ function Step2To4(props) {
         </label>
         <input type="submit" value="Submit" />
       </form>
-      <p>examples: {props.eOptions.join(" ")}</p>
+      <p>Examples: {props.eOptions.join(" ")}</p>
     </div>
   );
 }
@@ -84,7 +84,7 @@ function Step5(props) {
         </label>
         <input type="submit" value="Submit" />
       </form>
-      <p>examples: {props.dOptions.join(" ")} ... + any multiple of {phi}({N})</p>
+      <p>Examples: {props.dOptions.join(" ")} ... + any multiple of {phi}({N})</p>
       <div />
       <div style={{display: "flex"}}>
         <div style={{width: "160px"}}>Your public key will be: </div><div style={{width: "50px"}}>({e}, {N})</div>
@@ -111,7 +111,7 @@ function EncryptDecrypt(props) {
       <form className="encryptDecrypt" onSubmit={props.handleSubmitEndecrypt}>
         <div>
           <label htmlFor="keyInput">
-            key:&nbsp;
+            Key:&nbsp;
           </label>
           (
           <input id="keyInput" type="text" value={props.key1} onChange={props.handleChangeKey1} required />
@@ -122,20 +122,24 @@ function EncryptDecrypt(props) {
         </div>
         <div>
           <label htmlFor="textInput">
-            text:&nbsp;
+            Text:&nbsp;
           </label>
           <textarea id="textInput" type="textarea" value={props.textInput} onChange={props.handleChangeTextInput} />
           <div />
         </div>
         <div>
           <label htmlFor="unicodeInput">
-            unicode:&nbsp;
+            Unicode:&nbsp;
           </label>
           <textarea id="unicodeInput" type="textarea" value={props.unicodeInput} onChange={props.handleChangeUnicodeInput} />
           <div />
           </div>
         <input type="submit" value="Submit" />
       </form>
+      <div>&nbsp;</div>
+      <div>
+        Transforms each Unicode value into code<sup>Key<sub>1</sub></sup> % Key<sub>2</sub>
+      </div>
     </div>
   );
 }
