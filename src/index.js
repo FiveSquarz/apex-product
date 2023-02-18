@@ -34,7 +34,7 @@ function Step2To4(props) {
   const pv = <span className="color1">{props.p}</span>;
   const qv = <span className="color2">{props.q}</span>;
   const N = <span className="color3">N</span>;
-  const Nv = <span className="color3">{props.q * props.q}</span>;
+  const Nv = <span className="color3">{props.p * props.q}</span>;
   const phi = <span className="color4">Φ</span>;
   const phiv = <span className="color4">{(props.p - 1) * (props.q - 1)}</span>;
   const e = <span className="color5">e</span>;
@@ -63,7 +63,7 @@ function Step5(props) {
   const pv = <span className="color1">{props.p}</span>;
   const qv = <span className="color2">{props.q}</span>;
   const N = <span className="color3">N</span>;
-  const Nv = <span className="color3">{props.q * props.q}</span>;
+  const Nv = <span className="color3">{props.p * props.q}</span>;
   const phi = <span className="color4">Φ</span>;
   const phiv = <span className="color4">{(props.p - 1) * (props.q - 1)}</span>;
   const e = <span className="color5">e</span>;
@@ -225,7 +225,7 @@ class App extends React.Component {
       p: isNaN(parseInt(event.target.value)) ? "" : parseInt(event.target.value)
     }, () => {
       this.setState({
-        visible: this.getStep1(event.target.value, this.state.q)
+        visible: this.getStep1()
       });
     });
   }
@@ -235,7 +235,7 @@ class App extends React.Component {
       q: isNaN(parseInt(event.target.value)) ? "" : parseInt(event.target.value)
     }, () => {
       this.setState({
-        visible: this.getStep1(this.state.p, event.target.value)
+        visible: this.getStep1()
       });
     });
   }
