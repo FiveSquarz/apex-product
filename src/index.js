@@ -9,7 +9,7 @@ function Step1(props) {
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
       <p>
-        Step 1: enter 2 prime numbers {p} and {q} whose product is at least 10 <a href="https://raw.githubusercontent.com/FiveSquarz/apex-product/main/src/primes.txt" target="_blank">(list of prime numbers)</a>
+        Step 1: enter 2 different prime numbers {p} and {q} whose product is at least 10 <a href="https://raw.githubusercontent.com/FiveSquarz/apex-product/main/src/primes.txt" target="_blank">(list of prime numbers)</a>
       </p>
       <form onSubmit={props.handleSubmitPQ} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <label>
@@ -243,7 +243,7 @@ class App extends React.Component {
   handleSubmitPQ(event) {
     const p = parseInt(this.state.p);
     const q = parseInt(this.state.q);
-    if (isNaN(p) || isNaN(q) || !this.isPrime(p) || !this.isPrime(q) || p * q <= 9) {
+    if (isNaN(p) || isNaN(q) || !this.isPrime(p) || !this.isPrime(q) || p * q <= 9 || p == q) {
       alert("your inputs are invalid");
     } else {
       let allEOptions = this.generateEOptions();
