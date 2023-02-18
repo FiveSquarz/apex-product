@@ -243,7 +243,7 @@ class App extends React.Component {
   handleSubmitPQ(event) {
     const p = parseInt(this.state.p);
     const q = parseInt(this.state.q);
-    if (isNaN(p) || isNaN(q) || !this.isPrime(p) || !this.isPrime(q) || p * q <= 9) {
+    if (isNaN(p) || isNaN(q) || !this.isPrime(p) || !this.isPrime(q) || p * q <= 9 || p == q) {
       alert("your inputs are invalid");
     } else {
       let allEOptions = this.generateEOptions();
