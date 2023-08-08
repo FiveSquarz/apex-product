@@ -1,151 +1,16 @@
-/* global BigInt */
 import React, { ReactNode } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-function Step1(props: {p: string, q: string, handleChangeP: React.ChangeEventHandler<HTMLInputElement>, handleChangeQ: React.ChangeEventHandler<HTMLInputElement>, handleSubmitPQ: React.FormEventHandler<HTMLFormElement>}) {
-  const p = <span className="color1">p</span>;
-  const q = <span className="color2">q</span>;
-  return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <p>
-        Step 1: enter 2 different prime numbers {p} and {q} whose product is at least 10 <a href="https://raw.githubusercontent.com/FiveSquarz/apex-product/main/src/assets/primes.txt" target="_blank">(list of prime numbers)</a>
-      </p>
-      <form onSubmit={props.handleSubmitPQ} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <label>
-          {p}:&nbsp;
-          <input type="text" value={props.p} onChange={props.handleChangeP} required />
-          <span className="transparent">p:&nbsp;</span> {/*centering*/}
-        </label>
-        <label>
-          {q}:&nbsp;
-          <input type="text" value={props.q} onChange={props.handleChangeQ} required />
-          <span className="transparent">q:&nbsp;</span>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
-  );
-}
-
-function Step2To4(props: {p: string, q: string, e: string, eOptions: number[], handleChangeE: React.ChangeEventHandler<HTMLInputElement>, handleSubmitE: React.FormEventHandler<HTMLFormElement>}) {
-  const p = <span className="color1">p</span>;
-  const q = <span className="color2">q</span>;
-  const pv = <span className="color1">{props.p}</span>;
-  const qv = <span className="color2">{props.q}</span>;
-  const N = <span className="color3">N</span>;
-  const Nv = <span className="color3">{parseInt(props.p) * parseInt(props.q)}</span>;
-  const phi = <span className="color4">Φ</span>;
-  const phiv = <span className="color4">{(parseInt(props.p) - 1) * (parseInt(props.q) - 1)}</span>;
-  const e = <span className="color5">e</span>;
-  return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <p>Step 1: {p} = {pv}, {q} = {qv}</p>
-      <p>Step 2: {N} = {p} * {q} = {Nv}</p>
-      <p>Step 3: {phi}({N}) = ({p} - 1)({q} - 1) = {phiv}</p>
-      <p>Step 4: choose an integer {e} such that 1 &lt; {e} &lt; {phi}({N}) and {e} is coprime with {N} and {phi}({N})</p>
-      <form onSubmit={props.handleSubmitE} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <label>
-          {e}:&nbsp;
-          <input type="text" value={props.e} onChange={props.handleChangeE} required />
-          <span className="transparent">e:&nbsp;</span>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-      <p>Examples: {props.eOptions.join(" ")}</p>
-    </div>
-  );
-}
-
-function Step5(props: {p: string, q: string, e: string, d: string, dOptions: number[], handleChangeD: React.ChangeEventHandler<HTMLInputElement>, handleSubmitD: React.FormEventHandler<HTMLFormElement>}) {
-  const p = <span className="color1">p</span>;
-  const q = <span className="color2">q</span>;
-  const pv = <span className="color1">{props.p}</span>;
-  const qv = <span className="color2">{props.q}</span>;
-  const N = <span className="color3">N</span>;
-  const Nv = <span className="color3">{parseInt(props.p) * parseInt(props.q)}</span>;
-  const phi = <span className="color4">Φ</span>;
-  const phiv = <span className="color4">{(parseInt(props.p) - 1) * (parseInt(props.q) - 1)}</span>;
-  const e = <span className="color5">e</span>;
-  const ev = <span className="color5">{props.e}</span>;
-  const d = <span className="color6">d</span>;
-  return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <p>Step 1: {p} = {pv}, {q} = {qv}</p>
-      <p>Step 2: {N} = {Nv}</p>
-      <p>Step 3: {phi}({N}) = {phiv}</p>
-      <p>Step 4: {e} = {ev}</p>
-      <p>Step 5: choose a positive integer {d} such that {d}{e} % {phi}({N}) = 1</p>
-      <form onSubmit={props.handleSubmitD} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <label>
-          {d}:&nbsp;
-          <input type="text" value={props.d} onChange={props.handleChangeD} required />
-          <span className="transparent">d:&nbsp;</span>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-      <p>Examples: {props.dOptions.join(" ")} ... + any multiple of {phi}({N})</p>
-      <div />
-      <div style={{display: "flex"}}>
-        <div style={{width: "160px"}}>Your public key will be: </div><div style={{width: "50px"}}>({e}, {N})</div>
-      </div>
-      <div style={{display: "flex"}}>
-        <div style={{width: "160px"}}>Your private key will be: </div><div style={{width: "50PX"}}>({d}, {N})</div>
-      </div>
-    </div>
-  );
-}
-
-function Step6(props: {p: string, q: string, e: string, d: string}) {
-  return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <div>Your public key is: ({props.e}, {parseInt(props.p) * parseInt(props.q)})</div>
-      <div>Your private key is: ({props.d}, {parseInt(props.p) * parseInt(props.q)})</div>
-    </div>
-  )
-}
-
-function EncryptDecrypt(props: {key1: string, key2: string, textInput: string, unicodeInput: string, handleChangeKey1: React.ChangeEventHandler<HTMLInputElement>, handleChangeKey2: React.ChangeEventHandler<HTMLInputElement>, handleChangeTextInput: React.ChangeEventHandler<HTMLTextAreaElement>, handleChangeUnicodeInput: React.ChangeEventHandler<HTMLTextAreaElement>, handleSubmitEndecrypt: React.FormEventHandler<HTMLFormElement>}) {
-  return (
-    <div>
-      <form className="encryptDecrypt" onSubmit={props.handleSubmitEndecrypt}>
-        <div>
-          <label htmlFor="keyInput">
-            Key:&nbsp;
-          </label>
-          (
-          <input id="keyInput" type="text" value={props.key1} onChange={props.handleChangeKey1} required />
-          ,&nbsp;
-          <input type="text" value={props.key2} onChange={props.handleChangeKey2} required />
-          )
-          <div />
-        </div>
-        <div>
-          <label htmlFor="textInput">
-            Text:&nbsp;
-          </label>
-          <textarea id="textInput" spellCheck={false} value={props.textInput} onChange={props.handleChangeTextInput} />
-          <div />
-        </div>
-        <div>
-          <label htmlFor="unicodeInput">
-            Unicode:&nbsp;
-          </label>
-          <textarea id="unicodeInput" spellCheck={false} value={props.unicodeInput} onChange={props.handleChangeUnicodeInput} />
-          <div />
-          </div>
-        <input type="submit" value="Submit" />
-      </form>
-      <div>&nbsp;</div>
-      <div>
-        Transforms each Unicode value into code<sup>Key<sub>1</sub></sup> % Key<sub>2</sub>
-      </div>
-    </div>
-  );
-}
+import Step1 from './Step1';
+import Step2To4 from './Steps2To4';
+import Step5 from './Step5';
+import Step6 from './Step6';
+import EncryptDecrypt from './EncryptDecrypt';
 
 type AppState = {
-  visible: ReactNode
+  step: number
+  onEncryptScreen: boolean
   p: string
   q: string
   e: string
@@ -161,12 +26,8 @@ type AppState = {
 
 class App extends React.Component<{}, AppState> {
 
-  private step: number
-
   constructor(props: {}) {
     super(props);
-
-    this.step = 1;
 
     this.handleChangeP = this.handleChangeP.bind(this);
     this.handleChangeQ = this.handleChangeQ.bind(this);
@@ -186,7 +47,8 @@ class App extends React.Component<{}, AppState> {
     this.handleSubmitEndecrypt = this.handleSubmitEndecrypt.bind(this);
 
     this.state = {
-      visible: this.getStep1(),
+      step: 1,
+      onEncryptScreen: false,
 
       p: "",
       q: "",
@@ -205,63 +67,29 @@ class App extends React.Component<{}, AppState> {
     };
   }
 
-  getStepN(step: number) {
-    if (step == 1) {
-      return this.getStep1();
-    } else if (step >= 2 && step <= 4) {
-      return this.getStep2To4();
-    } else if (step == 5) {
-      return this.getStep5();
-    } else if (step == 6) {
-      return this.getStep6();
-    }
-  }
-
-  getStep1() {
-    return <Step1 p={this.state != null ? this.state.p : ""} q={this.state != null ? this.state.q : ""} handleChangeP={this.handleChangeP} handleChangeQ={this.handleChangeQ} handleSubmitPQ={this.handleSubmitPQ} />;
-  }
-
-  getStep2To4() {
-    return <Step2To4 p={this.state.p} q={this.state.q} e={this.state.e} eOptions={this.state.eOptions} handleChangeE={this.handleChangeE} handleSubmitE={this.handleSubmitE} />;
-  }
-
-  getStep5() {
-    return <Step5 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} dOptions={this.state.dOptions} handleChangeD={this.handleChangeD} handleSubmitD={this.handleSubmitD} />;
-  }
-
-  getStep6() {
-    return <Step6 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} />;
-  }
-
-  getEncryptDecrypt() {
-    return <EncryptDecrypt key1={this.state.key1} key2={this.state.key2} textInput={this.state.textInput} unicodeInput={this.state.unicodeInput} handleChangeKey1={this.handleChangeKey1} handleChangeKey2={this.handleChangeKey2} handleChangeTextInput={this.handleChangeTextInput} handleChangeUnicodeInput={this.handleChangeUnicodeInput} handleSubmitEndecrypt={this.handleSubmitEndecrypt} />;
-  }
-
   handleChangeP(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      p: isNaN(parseInt(event.target.value)) ? "" : event.target.value
-    }, () => {
-      this.setState({
-        visible: this.getStep1()
-      });
+      p: event.target.value.replace(/[^\d]/g, "")
     });
   }
 
   handleChangeQ(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      q: isNaN(parseInt(event.target.value)) ? "" : event.target.value
-    }, () => {
-      this.setState({
-        visible: this.getStep1()
-      });
+      q: event.target.value.replace(/[^\d]/g, "")
     });
   }
 
   handleSubmitPQ(event: React.FormEvent<HTMLFormElement>) {
     const p = parseInt(this.state.p);
     const q = parseInt(this.state.q);
-    if (isNaN(p) || isNaN(q) || !this.isPrime(p) || !this.isPrime(q) || p * q <= 9 || p == q) {
-      alert("your inputs are invalid");
+    if (isNaN(p) || !this.isPrime(p)) {
+      alert("p should be a prime number")
+    } else if (isNaN(q) || !this.isPrime(q)) {
+      alert("q should be a prime number")
+    } else if (p == q) {
+      alert("p and q should be different prime numbers")
+    } else if (p * q <= 9) {
+      alert("The product of p and q should be at least 10")
     } else {
       let allEOptions = this.generateEOptions();
       let temp = [...allEOptions];
@@ -283,41 +111,29 @@ class App extends React.Component<{}, AppState> {
       }
       eOptions.sort((a, b) => a - b);
 
-      this.step = 4;
       this.setState({
+        step: 4,
         allEOptions: allEOptions,
         eOptions: eOptions,
-      }, () => {
-        this.setState({
-          visible: this.getStep2To4(),
-        });
       });
     }
-    event.preventDefault();
+    event.preventDefault(); //prevent refreshing site when clicking "ok" on error
   }
 
   handleChangeE(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      e: isNaN(parseInt(event.target.value)) ? "" : event.target.value
-    }, () => {
-      this.setState({
-        visible: this.getStep2To4()
-      });
+      e: event.target.value.replace(/[^\d]/g, "")
     });
   }
 
   handleSubmitE(event: React.FormEvent<HTMLFormElement>) {
     const e = parseInt(this.state.e);
     if (isNaN(e) || !this.state.allEOptions.includes(e)) {
-      alert("your input is invalid");
+      alert("Your input does not meet the criteria");
     } else {
-      this.step = 5;
       this.setState({
+        step: 5,
         dOptions: this.generateDOptions()
-      }, () => {
-        this.setState({
-          visible: this.getStep5()
-        });
       });
     }
     event.preventDefault();
@@ -325,22 +141,17 @@ class App extends React.Component<{}, AppState> {
 
   handleChangeD(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      d: isNaN(parseInt(event.target.value)) ? "" : event.target.value
-    }, () => {
-      this.setState({
-        visible: this.getStep5()
-      });
+      d: event.target.value.replace(/[^\d]/g, "")
     });
   }
 
   handleSubmitD(event: React.FormEvent<HTMLFormElement>) {
     const d = parseInt(this.state.d);
     if (isNaN(d) || !this.state.dOptions.includes(d)) {
-      alert("your input is invalid");
+      alert("Your input does not meet the criteria");
     } else {
-      this.step = 6;
       this.setState({
-        visible: this.getStep6()
+        step: 6,
       });
     }
     event.preventDefault();
@@ -348,33 +159,20 @@ class App extends React.Component<{}, AppState> {
 
   handleChangeKey1(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      key1: isNaN(parseInt(event.target.value)) ? "" : event.target.value
-    }, () => {
-      this.setState({
-        visible: this.getEncryptDecrypt()
-      });
+      key1: event.target.value.replace(/[^\d]/g, "")
     });
   }
 
   handleChangeKey2(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      key2: isNaN(parseInt(event.target.value)) ? "" : event.target.value
-    }, () => {
-      this.setState({
-        visible: this.getEncryptDecrypt()
-      });
+      key2: event.target.value.replace(/[^\d]/g, "")
     });
   }
 
   handleChangeTextInput(event: React.ChangeEvent<HTMLTextAreaElement>) {
     this.setState({
       textInput: event.target.value,
-
       unicodeInput: this.textToUnicode(event.target.value)
-    }, () => {
-      this.setState({
-        visible: this.getEncryptDecrypt()
-      })
     });
   }
 
@@ -382,12 +180,7 @@ class App extends React.Component<{}, AppState> {
     const newUnicode = event.target.value.replace(/[^\d| ]/g, "");
     this.setState({
       unicodeInput: newUnicode,
-
       textInput: this.unicodeToText(newUnicode)
-    }, () => {
-      this.setState({
-        visible: this.getEncryptDecrypt()
-      })
     });
   }
 
@@ -401,10 +194,6 @@ class App extends React.Component<{}, AppState> {
     this.setState({
       unicodeInput: newCodes,
       textInput: this.unicodeToText(newCodes)
-    }, () => {
-      this.setState({
-        visible: this.getEncryptDecrypt()
-      });
     });
     event.preventDefault();
   }
@@ -419,7 +208,8 @@ class App extends React.Component<{}, AppState> {
 
   unicodeToText(unicode: string) {
     let result = "";
-    for (const code of unicode.split(" ").filter((value, index, arr) => {return value != ""})) {
+    for (const code of unicode.split(" ").filter((value, _, __) => {return value != ""})) {
+      //1114111 is last valid code point
       result += BigInt(code) <= BigInt(1114111) ? String.fromCodePoint(parseInt(code)) : " ";
     }
     return result;
@@ -432,10 +222,8 @@ class App extends React.Component<{}, AppState> {
   }
 
   gcf(a: number, b: number): number {
-    if (!b) {
+    if (!b)
       return a;
-    }
-
     return this.gcf(b, a % b);
   }
 
@@ -470,25 +258,34 @@ class App extends React.Component<{}, AppState> {
   }
 
   render() {
+    let toShow: ReactNode
+    if (this.state.onEncryptScreen)
+      toShow = <EncryptDecrypt key1={this.state.key1} key2={this.state.key2} textInput={this.state.textInput} unicodeInput={this.state.unicodeInput} handleChangeKey1={this.handleChangeKey1} handleChangeKey2={this.handleChangeKey2} handleChangeTextInput={this.handleChangeTextInput} handleChangeUnicodeInput={this.handleChangeUnicodeInput} handleSubmitEndecrypt={this.handleSubmitEndecrypt} />;
+    else if (this.state.step === 1)
+      toShow = <Step1 p={this.state != null ? this.state.p : ""} q={this.state != null ? this.state.q : ""} handleChangeP={this.handleChangeP} handleChangeQ={this.handleChangeQ} handleSubmitPQ={this.handleSubmitPQ} />;
+    else if (this.state.step === 4)
+      toShow = <Step2To4 p={this.state.p} q={this.state.q} e={this.state.e} eOptions={this.state.eOptions} handleChangeE={this.handleChangeE} handleSubmitE={this.handleSubmitE} />;
+    else if (this.state.step === 5)
+      toShow = <Step5 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} dOptions={this.state.dOptions} handleChangeD={this.handleChangeD} handleSubmitD={this.handleSubmitD} />;
+    else if (this.state.step === 6)
+      toShow = <Step6 p={this.state.p} q={this.state.q} e={this.state.e} d={this.state.d} />;
+
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div className="game" style={{ fontSize: "5vmin" }}>
+        <div style={{ fontSize: "5vmin" }}>
           RSA Encryption Demo
-        </div>
-        <div className="game" style={{ fontSize: "2vmin"}}>
-          Chuanhai Xu's APEX Product
         </div>
 
         <div style={{height: "40px"}} />
 
-        <div className='game'>
+        <div>
           <button onClick={() => {
-            this.setState({ visible: this.getStepN(this.step) })
+            this.setState({ onEncryptScreen: false })
           }}>
             Generate Keys
           </button>
           <button onClick={() => {
-            this.setState({ visible: this.getEncryptDecrypt() })
+            this.setState({ onEncryptScreen: true })
           }}>
             Encrypt/Decrypt
           </button>
@@ -496,7 +293,7 @@ class App extends React.Component<{}, AppState> {
 
         <div style={{height: "40px"}} />
 
-        {this.state.visible}
+        {toShow}
 
       </div>
     );
