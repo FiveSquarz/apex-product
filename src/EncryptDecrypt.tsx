@@ -33,6 +33,18 @@ export default function EncryptDecrypt(props: {key1: string, key2: string, textI
       <div>
         Transforms each Unicode value into code<sup>Key<sub>1</sub></sup> % Key<sub>2</sub>
       </div>
+      <div>&nbsp;</div>
+      <div>
+        Try using either your public or private key to encrypt a message, then use the other key to decrypt the ciphertext!
+      </div>
+      <div>&nbsp;</div>
+      <div>
+        If the site refreshes when you click submit, that means your key was too large and your browser ran out of memory trying to perform the computation (the exponents can be massive!)
+      </div>
+      <div>&nbsp;</div>
+      <div>
+        If your Key<sub>2</sub> is too small ({"<"} &tilde;130), common characters in your message may be lost due to the modulo
+      </div>
     </div>
   );
 }
