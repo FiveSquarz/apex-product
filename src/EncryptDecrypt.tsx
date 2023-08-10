@@ -43,7 +43,7 @@ export default function EncryptDecrypt(props: {key1: string, key2: string, textI
       </div>
       <div>&nbsp;</div>
       <div>
-        If your Key<sub>2</sub> is too small ({"<"} &tilde;130), common characters in your message may be lost due to the modulo
+        If your Key<sub>2</sub> is too small ({"<"} &tilde;125), common characters with low Unicode values in your message may be lost due to the modulo
       </div>
     </div>
   );
